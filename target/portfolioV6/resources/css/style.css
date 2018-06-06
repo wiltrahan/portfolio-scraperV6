@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:500|Raleway:300|Roboto:100');
+@import url('https://fonts.googleapis.com/css?family=Quattrocento+Sans|Quattrocento:700');
+
+
+
+body {
+    background-color: #F2F2F2;
+    padding-top: 60px;
+}
+
+h1 {
+	font-family: 'Quattrocento', serif;
+	font-size: 3rem;
+}
+
+p.lead {
+	font-family: 'Roboto', sans-serif;
+}
+
+p#snap-wait {
+	font-family: 'Roboto', sans-serif;
+}
+
+.bg-light {
+    background-color: #52656B!important;
+   
+}
+#nav-text {
+    color: #F5F5D4;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 1.6rem;
+}
+
+.login_name {
+	color: #F5F5D4;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+}
+
+.navbar {
+    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.75);}
+
+.table {
+    box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);}
+
+.table .thead-dark th {
+    background-color: #52656B;
+    font-family: 'Raleway', sans-serif;
+    color: #F5F5D4;
+    border-color: #415054;
+
+}
+
+#date-tron {
+	margin-top: 30px;
+}
+.stock-info-date {
+    padding-top: 10px;
+    color: #415054;
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    margin-top: 30px;
+
+}
+
+.my-nav-btn {
+	height: 30px;
+	padding: 0;
+	width: 70px;
+	background-color: #F2F2F2;;
+	color: #52656B;
+}
+#date {
+    font-size: 0.8em;
+}
+
+#time {
+    font-size: 0.6em;
+}
+
+.table-bordered td {
+    border-color: #415054;
+}
+
+#jumbo {
+	margin-top: 20px;
+}
+
+#app-info-box {
+	background-color: #F7F7F7;
+}
+
+.my-table {
+	margin-bottom: 100px;
+}
+
+.new-snapshot {
+	color: #02d717;
+	font-size: 175%;
+	font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+#snap {
+	border-color: green;
+}
+
+.mybtn {
+	border-color: #52656B;
+	border-radius: 25px;
+	color: #52656B;
+	background-color: #f4f4f4;
+	border: 1.5px solid #F0CA4D;
+	font-family: Georgia;
+	box-shadow: 0px 3px 3px #666666;
+}
+.mybtn:hover {
+	background: #52656B;
+	border-color: #52656B;
+	color: #F5F5D4;
+}
+
+.footer {
+	bottom: 0;
+	height: 40px;
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #60767D;
+}
+.foot-text {	
+	color: #DBDBBE;
+}
+
+
+/* LOADING */
+#loading {
+	color: #FF1959;
+	font-size: 200%;
+	font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+}
+#loading span{
+	color: #52656B;;
+}
+
