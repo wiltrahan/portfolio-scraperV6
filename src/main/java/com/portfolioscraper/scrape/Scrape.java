@@ -13,7 +13,7 @@ import com.portfolioscraper.dao.DateTimeDAOImpl;
 import com.portfolioscraper.entity.DateTime;
 import com.portfolioscraper.entity.Stock;
 
-public class Scrape implements IScrape {
+public class Scrape {
 	
 	private static WebDriver driver;
 	
@@ -29,8 +29,6 @@ public class Scrape implements IScrape {
 //		Scrape scrape = new Scrape();
 //		scrape.login(username, password);
 	}
-	
-	
 	
 	public void startScraping() {
 		

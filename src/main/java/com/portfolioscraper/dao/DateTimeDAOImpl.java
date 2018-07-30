@@ -35,14 +35,20 @@ public class DateTimeDAOImpl implements DateTimeDAO {
 		
 		//get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
+		int totalRows = ((Long)currentSession.createQuery("select count(*) from DateTime").uniqueResult()).intValue();
+		int rowsCut = totalRows % 10;
 		
+		System.out.println("***TOTAL ROWS " + totalRows);
 		//create a query
 		Query<DateTime> theQuery = 
 				currentSession.createQuery("from DateTime", DateTime.class);
 		
 		//execute query and get result list
-		List<DateTime> dateTimes = theQuery.getResultList();
-			
+		List<DateTime> dateTimes = theQuery
+				.setFirstResult(rowsCut)
+				.setMaxResults(10)
+				.getResultList();
+		
 		//return results	
 		return dateTimes;
 	}
@@ -78,6 +84,7 @@ public class DateTimeDAOImpl implements DateTimeDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<DateTime> getDate(int id) {
+		
 		List<DateTime> theDate = new ArrayList<>();
 
 		SessionFactory factory = new Configuration()
@@ -90,7 +97,6 @@ public class DateTimeDAOImpl implements DateTimeDAO {
 
 		try {
 			session.beginTransaction();
-
 			theDate = session.createQuery("from DateTime where id=" + id).getResultList();
 //			for(Stock tempStock : theStocks) {
 //				System.out.println(tempStock);
