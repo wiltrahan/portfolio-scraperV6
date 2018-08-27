@@ -35,17 +35,21 @@ public class DateTimeDAOImpl implements DateTimeDAO {
 		
 		//get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
-		int totalRows = ((Long)currentSession.createQuery("select count(*) from DateTime").uniqueResult()).intValue();
-		int rowsCut = totalRows % 10;
+//		int totalRows = ((Long)currentSession.createQuery("select count(*) from DateTime").uniqueResult()).intValue();
+//		int rowsCut = totalRows % 10;
 		
-		System.out.println("***TOTAL ROWS " + totalRows);
+		//System.out.println("***TOTAL ROWS " + totalRows);
 		//create a query
 		Query<DateTime> theQuery = 
 				currentSession.createQuery("from DateTime", DateTime.class);
 		
 		//execute query and get result list
+//		List<DateTime> dateTimes = theQuery
+//				.setFirstResult(rowsCut)
+//				.setMaxResults(10)
+//				.getResultList();
 		List<DateTime> dateTimes = theQuery
-				.setFirstResult(rowsCut)
+				.setFirstResult(10)
 				.setMaxResults(10)
 				.getResultList();
 		
