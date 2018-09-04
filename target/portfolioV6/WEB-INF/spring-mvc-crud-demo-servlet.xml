@@ -32,7 +32,8 @@
 		class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/portfolio-scraperV2?useSSL=false" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/portfolio-scraperV2?useSSL=false" />
 		<property name="user" value="portfolioV2" />
 		<property name="password" value="frankie1" />
 
