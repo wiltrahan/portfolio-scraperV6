@@ -148,7 +148,8 @@
 						used in this application are as follows:
 					</p>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Java 9</li>
+						<li class="list-group-item">Java 8</li>
+						<li class="list-group=item">AWS</li>
 						<li class="list-group-item">Maven</li>
 						<li class="list-group-item">Spring</li>
 						<li class="list-group-item">Spring Security</li>
