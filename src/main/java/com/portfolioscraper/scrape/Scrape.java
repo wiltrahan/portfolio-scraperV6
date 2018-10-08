@@ -42,7 +42,7 @@ public class Scrape {
 		String username = personal.getUsername();
 		String password = personal.getPassword();
 		
-		//Scrape scrape = new Scrape();
+		
 		login(username, password);
 	}
 	
