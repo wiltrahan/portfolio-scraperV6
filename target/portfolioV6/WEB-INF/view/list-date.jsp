@@ -24,10 +24,10 @@
 			$(document).ajaxStart(function() {
                 $('#loading').show();
             })
+            
 			$.ajax({
 				url: '${pageContext.request.contextPath}/SnapshotServlet',
 				type: 'GET',
-				
 				success:function() {
 					//write a function to refresh page here.
 					$(document).ajaxStop(function() {
