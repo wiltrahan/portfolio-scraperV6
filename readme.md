@@ -5,7 +5,6 @@ I was tasked with creating a full stack Java application for my final project at
 ### Technologies used in this application are as follows:
 
 * Java 8
-* Amazon Web Services
 * Maven
 * Spring MVC
 * Spring Security
