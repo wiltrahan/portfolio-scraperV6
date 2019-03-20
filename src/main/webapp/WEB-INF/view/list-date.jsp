@@ -27,6 +27,7 @@
             })
             
 			$.ajax({
+				/* url: '${pageContext.request.contextPath}/SnapshotServlet', */
 				url: '${pageContext.request.contextPath}/SnapshotServlet',
 				type: 'GET',
 				success:function() {

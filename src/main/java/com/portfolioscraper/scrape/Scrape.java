@@ -8,6 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.ProfilesIni;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.portfolioscraper.dao.DateTimeDAOImpl;
 import com.portfolioscraper.entity.DateTime;
@@ -32,16 +35,27 @@ public class Scrape {
 	
 	public void startScraping() {
 		
+		System.setProperty("webdriver.gecko.driver", "/Users/twilorip/Desktop/eclipse-workspace/portfolioV6/geckodriver");
+		
+//		ProfilesIni profile = new ProfilesIni();
+//		FirefoxProfile myProfile = profile.getProfile("default");
+//		
+//		DesiredCapabilities dc = DesiredCapabilities.firefox();
+//		dc.setCapability(FirefoxDriver.PROFILE, myProfile);
+//		dc.setCapability("marionette", true);
+		
+		
 		FirefoxOptions options = new FirefoxOptions();
-		options.setHeadless(true);
+		options.setHeadless(false);
+		// options.setLegacy(true);
 		
 		driver = new FirefoxDriver(options);
+		
 		//driver = new FirefoxDriver();
 		
 		Personal personal = new Personal();
 		String username = personal.getUsername();
 		String password = personal.getPassword();
-		
 		
 		login(username, password);
 	}
@@ -49,6 +63,7 @@ public class Scrape {
 	private void login(String username, String password) {
 		String logScreen = "https://login.yahoo.com/config/login?.done=https%3A%2F%2Ffinance.yahoo.com%2Fportfolios&.intl=us&.lang=en-US&.src=finance";
 		driver.get(logScreen);
+		//driver.navigate().to(logScreen);
 		
 		try {
 			driver.findElement(By.id("login-username")).sendKeys(username);
@@ -75,10 +90,11 @@ public class Scrape {
 		try {
 			driver.navigate().to("https://finance.yahoo.com/portfolio/p_0/view/v1");
 			Thread.sleep(3000);
-			driver.findElement(By.xpath("/html/body/dialog/section/button")).click();								
+			// driver.findElement(By.xpath("/html/body/dialog/section/button")).click();	
 			valueScrape();
 		} catch (Exception e) {
-			System.out.println("To Portfolio Failed: " + e.getMessage());
+			System.out.println("To Portfolio Failed:** " + e.getMessage());
+			driver.quit();
 		}
 	}
 	
@@ -87,9 +103,12 @@ public class Scrape {
 		String date = dateTimeDAOImpl.currentDate();
 		String time = dateTimeDAOImpl.currentTime();
         
-		String portfolioTotal = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/header/div/div[1]/div/div[2]/p[1]")).getText();
-        String dayGain = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/header/div/div[1]/div/div[2]/p[2]/span")).getText();
-
+		// String portfolioTotal = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/header/div/div[1]/div/div[2]/p[1]")).getText();
+		String portfolioTotal = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[1]/div[1]")).getText();
+		System.out.println("***portTotal " + portfolioTotal);
+        // String dayGain = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/header/div/div[1]/div/div[2]/p[2]/span")).getText();
+		String dayGain = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[1]/div[2]/div[2]")).getText();
+        System.out.println("***dayGain " + dayGain);
         dateTimeDAOImpl.insertDateTimes(new DateTime(date, time, portfolioTotal, dayGain));
 		
 	}
@@ -97,11 +116,11 @@ public class Scrape {
 	public static List<Stock> stockScrape() {
 		List<Stock> stocks = new ArrayList<>();
 		for(int i = 1; i <= 10; i++) {
-			stocks.add(new Stock(driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[" + i + "]/td[1]/span/a")).getText(),
-					driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[" + i + "]/td[2]/span")).getText(),
-					driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[" + i + "]/td[3]/span")).getText(),
-					driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[" + i + "]/td[4]/span")).getText(),
-					driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[" + i + "]/td[8]")).getText()
+			stocks.add(new Stock(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]/td[1]/a")).getText(),
+					driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]/td[2]/span")).getText(),
+					driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]/td[3]/span")).getText(),
+					driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]/td[4]/span")).getText(),
+					driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]/td[8]")).getText()
 			));
 		}
 		driver.quit();

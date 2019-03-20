@@ -23,6 +23,7 @@
 			e.preventDefault();
 			$(document).ajaxStart(function() {
                 $('#loading').show();
+                
             })
             
 			$.ajax({

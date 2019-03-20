@@ -30,8 +30,14 @@ public class SnapshotServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Scrape scrape = new Scrape();
-		scrape.startScraping();
+		try {
+			Scrape scrape = new Scrape();
+			scrape.startScraping();
+		} catch (Exception e) {
+			System.out.println("SOMETHING WRONG?!?!?");
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 	
