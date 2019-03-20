@@ -34,7 +34,7 @@ public class SnapshotServlet extends HttpServlet {
 			Scrape scrape = new Scrape();
 			scrape.startScraping();
 		} catch (Exception e) {
-			System.out.println("SOMETHING WRONG?!?!?");
+			System.out.println("**PROBLEM** ");
 			System.out.println(e.getMessage());
 		}
 		

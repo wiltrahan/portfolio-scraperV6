@@ -8,9 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.ProfilesIni;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.portfolioscraper.dao.DateTimeDAOImpl;
 import com.portfolioscraper.entity.DateTime;
@@ -37,21 +34,10 @@ public class Scrape {
 		
 		System.setProperty("webdriver.gecko.driver", "/Users/twilorip/Desktop/eclipse-workspace/portfolioV6/geckodriver");
 		
-//		ProfilesIni profile = new ProfilesIni();
-//		FirefoxProfile myProfile = profile.getProfile("default");
-//		
-//		DesiredCapabilities dc = DesiredCapabilities.firefox();
-//		dc.setCapability(FirefoxDriver.PROFILE, myProfile);
-//		dc.setCapability("marionette", true);
-		
-		
 		FirefoxOptions options = new FirefoxOptions();
-		options.setHeadless(false);
-		// options.setLegacy(true);
+		options.setHeadless(true);
 		
 		driver = new FirefoxDriver(options);
-		
-		//driver = new FirefoxDriver();
 		
 		Personal personal = new Personal();
 		String username = personal.getUsername();
@@ -63,7 +49,6 @@ public class Scrape {
 	private void login(String username, String password) {
 		String logScreen = "https://login.yahoo.com/config/login?.done=https%3A%2F%2Ffinance.yahoo.com%2Fportfolios&.intl=us&.lang=en-US&.src=finance";
 		driver.get(logScreen);
-		//driver.navigate().to(logScreen);
 		
 		try {
 			driver.findElement(By.id("login-username")).sendKeys(username);
@@ -89,8 +74,7 @@ public class Scrape {
 	private void toYahooPortfolio() {
 		try {
 			driver.navigate().to("https://finance.yahoo.com/portfolio/p_0/view/v1");
-			Thread.sleep(3000);
-			// driver.findElement(By.xpath("/html/body/dialog/section/button")).click();	
+			Thread.sleep(3000);	
 			valueScrape();
 		} catch (Exception e) {
 			System.out.println("To Portfolio Failed:** " + e.getMessage());
@@ -103,12 +87,9 @@ public class Scrape {
 		String date = dateTimeDAOImpl.currentDate();
 		String time = dateTimeDAOImpl.currentTime();
         
-		// String portfolioTotal = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/header/div/div[1]/div/div[2]/p[1]")).getText();
 		String portfolioTotal = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[1]/div[1]")).getText();
-		System.out.println("***portTotal " + portfolioTotal);
-        // String dayGain = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/header/div/div[1]/div/div[2]/p[2]/span")).getText();
 		String dayGain = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/div/div/main/div[1]/div[2]/div[2]")).getText();
-        System.out.println("***dayGain " + dayGain);
+        
         dateTimeDAOImpl.insertDateTimes(new DateTime(date, time, portfolioTotal, dayGain));
 		
 	}
